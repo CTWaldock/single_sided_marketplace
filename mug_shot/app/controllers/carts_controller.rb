@@ -1,10 +1,11 @@
 class CartsController < ApplicationController
-  before_action :set_cart, only: [:show, :edit, :update, :destroy]
 
+  before_action :set_cart, only: [:show, :edit, :update, :destroy]
+  before_action :find_user
   # GET /carts
   # GET /carts.json
   def index
-    @carts = Cart.all
+    @carts = @user.carts
   end
 
   # GET /carts/1
@@ -59,6 +60,10 @@ class CartsController < ApplicationController
       format.html { redirect_to carts_url, notice: 'Cart was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def find_user
+    @user = User.find(params[:user_id])
   end
 
   private
