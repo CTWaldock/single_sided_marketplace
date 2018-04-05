@@ -50,7 +50,7 @@ class CartsController < ApplicationController
     if @user.carts.find_by(product_id: @cart.product_id) == nil
       if @cart.save
         flash[:notice] = "Item added to cart"
-        redirect_to(carts_path)
+        redirect_to(products_path)
       else
         flash[:notice] = "Failed to add item to cart"
         redirect_to(new_cart_path)
@@ -61,7 +61,7 @@ class CartsController < ApplicationController
       update_cart.save
       @cart.destroy
       flash[:notice] = "Item added to cart"
-      redirect_to(carts_path)
+      redirect_to(products_path)
     end
 
     # respond_to do |format|
@@ -80,7 +80,7 @@ class CartsController < ApplicationController
   def update
 
     @cart.update(cart_params)
-    flash[:notice] = "Item added to cart"
+    flash[:notice] = "Updated qty"
     redirect_to(carts_path)
     # respond_to do |format|
     #   if @cart.update(cart_params)
