@@ -1,23 +1,19 @@
 class CartsController < ApplicationController
 
   before_action :set_cart, only: [:show, :edit, :update, :destroy]
-  # before_action :find_user
 
   # GET /carts
   # GET /carts.json
   def index
+    @prices = []
     current_user.carts.each do |cart|
       cart[:name] = Product.find(cart.product_id).name
       cart[:price] = Product.find(cart.product_id).price
-
-    # @products = []
-    # product_hash ={}
-    # @user.carts.each do |cart|
-    #   product_hash[:qty] = cart.qty
-    #   product_hash[:name] = Product.where(product_id: cart.product_id).name
-      # product_hash[:price] = Product.where(product_id: cart.product_id).price
-      # @products.push(product_hash)
+      @prices.push(cart[:price])
     end
+    @sub_total = @prices.sum
+    @gst = @sub_total * 0.1
+    @total = @sub_total + @gst
   end
 
   # GET /carts/1
@@ -102,11 +98,6 @@ class CartsController < ApplicationController
     #   format.json { head :no_content }
     # end
   end
-
-  # def find_user
-  #   # @user = User.find(params[:user_id])
-  #   @user = User.first
-  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.
