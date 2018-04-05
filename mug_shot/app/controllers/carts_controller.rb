@@ -1,12 +1,12 @@
 class CartsController < ApplicationController
 
   before_action :set_cart, only: [:show, :edit, :update, :destroy]
-  before_action :find_user
+  # before_action :find_user
 
   # GET /carts
   # GET /carts.json
   def index
-    @user.carts.each do |cart|
+    current_user.carts.each do |cart|
       cart[:name] = Product.find(cart.product_id).name
       cart[:price] = Product.find(cart.product_id).price
 
@@ -41,10 +41,10 @@ class CartsController < ApplicationController
   def create
     @product = Product.find(params[:id])
     @cart = Cart.new
-    @cart.user_id = @user.id
+    @cart.user_id = current_user.id
     @cart.product_id = @product.id
     @cart.qty = 1
-    if @user.carts.find_by(product_id: @cart.product_id) == nil
+    if current_user.carts.find_by(product_id: @cart.product_id) == nil
       if @cart.save
         flash[:notice] = "Item added to cart"
         redirect_to(products_path)
@@ -53,7 +53,7 @@ class CartsController < ApplicationController
         redirect_to(new_cart_path)
       end
     else
-      update_cart = @user.carts.find_by(product_id: @cart.product_id)
+      update_cart = current_user.carts.find_by(product_id: @cart.product_id)
       update_cart.qty += @cart.qty
       update_cart.save
       @cart.destroy
@@ -103,10 +103,10 @@ class CartsController < ApplicationController
     # end
   end
 
-  def find_user
-    # @user = User.find(params[:user_id])
-    @user = User.first
-  end
+  # def find_user
+  #   # @user = User.find(params[:user_id])
+  #   @user = User.first
+  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.
