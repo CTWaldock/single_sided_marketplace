@@ -18,7 +18,8 @@
         <td><%= product.name %></td>
         <td><%= product.stock %></td>
         <td><%= product.price %></td>
-        <td><%= link_to('Add to cart', new_cart_path(id: product.id)) %></td>
+        <td><%= button_to 'Add to cart', carts_path, method: :post, params: { id: product.id } %></td>
+
 
         <td><%= link_to 'Show', product %></td>
         <td><%= link_to 'Edit', edit_product_path(product) %></td>
