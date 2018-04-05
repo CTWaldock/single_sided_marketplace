@@ -18,15 +18,19 @@
     <%= form.text_field :user_id %>
   </div>
 
-  <!-- <div class="field">
+  <div class="field">
     <%= form.label :product_id %>
     <%= form.text_field :product_id %>
-  </div> -->
+  </div>
 
   <div class="field">
     <%= form.label :qty %>
     <%= form.text_field :qty %>
   </div>
+
+    <div>
+      <%= "this is #{@cart.product_id}..." %>
+    </div>
 
   <div class="actions">
     <%= form.submit %>

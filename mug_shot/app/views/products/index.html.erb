@@ -2,16 +2,8 @@
 
 <h1>Products</h1>
 
-  <table>
-    <!-- <thead>
-      <tr>
-        <th>Name</th>
-        <th>Stock</th>
-        <th>Price</th>
-        <th colspan="3"></th>
-      </tr>
-    </thead> -->
-<div class="product_grid">
+<table>
+  <div class="product_grid">
       <% @products.each do |product| %>
         <section class="product">
           <div><%= product.name %></div>
@@ -23,7 +15,7 @@
 
       <% end %>
   </div>
-  </table>
+</table>
 
 <br>
 <% if current_user.is_admin %>

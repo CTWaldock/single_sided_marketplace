@@ -2,7 +2,6 @@ class CartsController < ApplicationController
 
   before_action :set_cart, only: [:show, :edit, :update, :destroy]
   before_action :find_user
-  before_action :find_product
 
   # GET /carts
   # GET /carts.json
@@ -29,7 +28,6 @@ class CartsController < ApplicationController
   # GET /carts/new
   def new
     @cart = Cart.new
-    # @cart.product_id = @product.id
   end
 
   # GET /carts/1/edit
@@ -38,22 +36,32 @@ class CartsController < ApplicationController
 
   # POST /carts
   # POST /carts.json
-  def create
 
-    @cart = Cart.new(cart_params)
+  # { controller: "carts", action: "create", id: product.id }, method: :post
+  def create
+    # render plain: params.inspect
+    # render plain: @product.inspect
+    # render plain: params[:id]
+    @product = Product.find(params[:id])
+
+    @cart = Cart.new
+    @cart.product_id = @product.id
     @cart.qty = 1
     if @user.carts.find_by(product_id: @cart.product_id) == nil
       if @cart.save
-        redirect_to(carts_path)
+        flash[:notice] = "Item added to cart"
+        redirect_to(products_path)
       else
-        redirect_to(carts_path)
+        flash[:notice] = "Failed to add item to cart"
+        redirect_to(new_cart_path)
       end
     else
       update_cart = @user.carts.find_by(product_id: @cart.product_id)
       update_cart.qty += @cart.qty
       update_cart.save
       @cart.destroy
-      redirect_to(carts_path)
+      flash[:notice] = "Item added to cart"
+      redirect_to(products_path)
     end
 
     # respond_to do |format|
@@ -72,7 +80,8 @@ class CartsController < ApplicationController
   def update
 
     @cart.update(cart_params)
-    redirect_to(carts_path(user_id: @user.id))
+    flash[:notice] = "Updated qty"
+    redirect_to(carts_path)
     # respond_to do |format|
     #   if @cart.update(cart_params)
     #     format.html { redirect_to @cart, notice: 'Cart was successfully updated.' }
@@ -102,11 +111,6 @@ class CartsController < ApplicationController
     @user = User.first
   end
 
-  def find_product
-    # @product = Product.find(params[:product_id])
-    @product = Product.first
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_cart
@@ -115,6 +119,6 @@ class CartsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def cart_params
-      params.require(:cart).permit(:qty, :user_id, :product_id,)
+      params.require(:cart).permit(:qty, :user_id, :product_id)
     end
 end
