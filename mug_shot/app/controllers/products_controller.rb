@@ -19,6 +19,8 @@ class ProductsController < ApplicationController
 
   # GET /products/1/edit
   def edit
+    @product = Post.new(post_params)
+    @product.user = current_user
   end
 
   # POST /products
