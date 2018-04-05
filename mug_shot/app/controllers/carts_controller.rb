@@ -39,12 +39,9 @@ class CartsController < ApplicationController
 
   # { controller: "carts", action: "create", id: product.id }, method: :post
   def create
-    # render plain: params.inspect
-    # render plain: @product.inspect
-    # render plain: params[:id]
     @product = Product.find(params[:id])
-
     @cart = Cart.new
+    @cart.user_id = @user.id
     @cart.product_id = @product.id
     @cart.qty = 1
     if @user.carts.find_by(product_id: @cart.product_id) == nil
