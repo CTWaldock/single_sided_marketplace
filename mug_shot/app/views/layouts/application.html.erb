@@ -3,22 +3,20 @@
   <head>
     <title>MugShot</title>
     <%= csrf_meta_tags %>
+    <link rel="stylesheet" href="../../assets/stylesheets/cart.css">
     <link rel="stylesheet" href="../../assets/stylesheets/application.css">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+
     <% if user_signed_in? %>
-        <p>Logged in as: <%= current_user.email %></p>
-        <%= link_to("logout", destroy_user_session_path, method: :delete) %>
+      <p align="right">Logged in as: <%= current_user.email %></p>
+      <p align="right"> <%= link_to("logout", destroy_user_session_path, method: :delete) %> </p>
     <% else %>
         <p>You are not logged in</p>
     <% end %>
-
-
-    <!-- <p class="notice"><%= notice %></p>
-       <p class="alert"><%= alert %></p> -->
 
 
     <%= yield %>
