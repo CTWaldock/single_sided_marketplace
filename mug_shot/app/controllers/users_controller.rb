@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :activate]
 
   def new
     @user = User.new
@@ -27,10 +27,21 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user.destroy
+    # @user.destroy
+    @user.deactivated = !@user.deactivated
+    @user.save
     respond_to do |format|
       format.html { redirect_to users_url, notice: 'User was successfully deactivated.' }
       format.json { head :no_content }
+    end
+  end
+  
+  def activate_toggle
+    if deactivated
+      update_attributes(deactivated: false) 
+    end
+    if !deactivated
+      update_attributes(deactivated: true)
     end
   end
 
