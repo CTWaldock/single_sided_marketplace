@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Users</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>Deactive</th>      
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @user.each do |user| %>
+      <tr>
+        <td><%= user.email %></td>
+        <td><%= user.deactivated %></td>        
+        <td><%= link_to 'Edit', edit_user_path(user) %></td>    
+        <td><%= link_to 'Activate/Deactivate', user, method: :delete, data: { confirm: 'Are you sure?' } %></td> 
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to '<< Back to shopping', products_path %>

@@ -5,5 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :carts
-
+  
+  def active_for_authentication?
+    super && !deactivated
+  end
 end
