@@ -6,13 +6,13 @@
   <div class="product_grid">
       <% @products.each do |product| %>
         <section class="product">
+          <div id="item_img"><%= image_tag("#{product.img_url}")%></div>
           <div><%= product.name %></div>
           <div><%= product.stock %></div>
           <div><%= product.price %></div>
           <div><%= link_to('Add to cart', new_cart_path(id: product.id)) %></div>
           <div><%= link_to 'More details', product %></div>
         </section>
-
       <% end %>
   </div>
 </table>

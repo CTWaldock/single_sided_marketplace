@@ -19,8 +19,6 @@ class ProductsController < ApplicationController
 
   # GET /products/1/edit
   def edit
-    @product = Post.new(post_params)
-    @product.user = current_user
   end
 
   # POST /products
@@ -71,6 +69,6 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:name, :stock, :price)
+      params.require(:product).permit(:name, :stock, :price, :img_url)
     end
 end

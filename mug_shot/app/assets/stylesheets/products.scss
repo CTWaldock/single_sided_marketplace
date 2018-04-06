@@ -2,12 +2,24 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.nav-link {
+  padding: 0;
+}
+
+#item_img {
+  img {
+    height: 12vh;
+    width: auto;
+    padding: 5px;
+  }
+}
 
 .product_grid {
    display: grid;
    grid-template-columns: 1fr 1fr 1fr;
    padding-left: 10vw;
    padding-right: 10vw;
+   padding-bottom: 5vh;
    grid-column-gap: 1em;
  }
 
@@ -20,4 +32,8 @@
   border: 0.2em;
   border-style: solid;
   border-color: black;
+
+  div {
+    margin: 0 auto;
+  }
 }
