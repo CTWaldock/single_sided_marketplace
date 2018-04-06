@@ -1,3 +1,25 @@
 // Place all the styles related to the Carts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.table {
+  margin-top: 50px;
+  column-width: 50px;
+}
+.columns {
+  width: 120px;
+}
+.table_head {
+  padding-top: 100px;
+  height: 70px;
+
+}
+.table_row {
+  padding: 50px;
+  height: 40px;
+}
+.totals_table {
+  margin-top: 50px;
+  border-top: solid black 1px;
+}
