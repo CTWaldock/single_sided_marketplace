@@ -19,8 +19,6 @@ class ProductsController < ApplicationController
 
   # GET /products/1/edit
   def edit
-    # render plain: @product.inspect
-    # @product.user = current_user
   end
 
   # POST /products

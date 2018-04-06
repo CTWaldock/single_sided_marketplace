@@ -6,5 +6,5 @@ root to: "products#index"
 resources :carts
 resources :products
 devise_for :users
-
+resources :users
 end
