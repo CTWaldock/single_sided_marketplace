@@ -5,4 +5,12 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :carts
+
+  def destroy
+    update_attributes(deactivated: true) unless deactivated
+  end
+  
+  def active_for_authentication?
+    super && !deactivated
+  end
 end
